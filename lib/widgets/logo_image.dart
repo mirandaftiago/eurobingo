@@ -12,7 +12,7 @@ class LogoImage extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(200),
       ),
-      child: Image.asset('assets/images/logo-eurobingo.png'),
+      child: Image.asset('assets/images/logo.png'),
     );
   }
 }

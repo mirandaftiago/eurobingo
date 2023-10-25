@@ -17,66 +17,71 @@ class LoginForm extends StatelessWidget {
   }
 
   void redirectAfterLogin(BuildContext context) {
-    if (formKey.currentState!.validate()) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const HomePage()));
-    }
+  if (formKey.currentState != null && formKey.currentState!.validate()) {
+    // Validation passed, navigate to the next page
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const HomePage()),
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 100),
-            child: Expanded(
-              child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const LogoImage(),
+              Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FormTextField(
+                      label: 'Username',
+                      hintText: 'Enter your email',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: validateFields,
+                    ),
+                    FormTextField(
+                      label: 'Password',
+                      hintText: 'Enter your password',
+                      obscureText: true,
+                      validator: validateFields,
+                    ),
+                    LoginButton(
+                      label: 'Login',
+                      onPressed: () => redirectAfterLogin(context),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const LogoImage(),
-                      FormTextField(
-                        label: 'Username',
-                        hintText: 'Enter your email',
-                        keyboardType: TextInputType.emailAddress,
-                        validator: validateFields,
+                  padding: const EdgeInsets.only(top: 150),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Forgot Password',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
                       ),
-                      FormTextField(
-                        label: 'Password',
-                        hintText: 'Enter your password',
-                        obscureText: true,
-                        validator: validateFields,
-                      ),
-                      LoginButton(
-                          label: 'Login',
-                          onPressed: () => redirectAfterLogin(context)),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 200),
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

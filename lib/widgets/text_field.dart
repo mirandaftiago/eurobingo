@@ -5,7 +5,10 @@ class FormTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
+  final TextEditingController? controller;
   final String? Function(String?) validator;
+    // Controller to track keyboard visibility
+  final FocusNode focusNode;
 
   const FormTextField({
     super.key,
@@ -13,6 +16,8 @@ class FormTextField extends StatelessWidget {
     required this.hintText,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
+    this.controller,
+    required this.focusNode,
     required this.validator,
   });
 
@@ -24,6 +29,8 @@ class FormTextField extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         obscureText: obscureText,
+        controller: controller,
+        focusNode: focusNode,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
           labelText: label,

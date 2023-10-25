@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class LoginButton extends StatelessWidget {
+class LoginRegisterButton extends StatelessWidget {
   final String label;
   final void Function() onPressed;
 
-  const LoginButton({
+  const LoginRegisterButton({
     super.key, 
     required this.label,
     required this.onPressed,

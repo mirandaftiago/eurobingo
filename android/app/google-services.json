@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "163720975212",
+    "project_id": "eurobingo",
+    "storage_bucket": "eurobingo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163720975212:android:a97842edfb35134f321949",
+        "android_client_info": {
+          "package_name": "com.example.eurobingo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7wsoDTUFLbUgLTAJL8WyGQAO5uk48hwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

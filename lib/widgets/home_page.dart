@@ -8,6 +8,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('HomePage'),
+        actions: const [
+        /*  ElevatedButton(
+            onPressed: () {
+              authService.signOut();
+              Navigator.of(context).pop();
+            },
+            child: const Text('Logout'),
+          ) */
+        ],
       ),
     );
   }

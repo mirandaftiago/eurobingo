@@ -25,16 +25,28 @@ class FormTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(70, 0, 70, 20),
-      child: TextFormField(
-        validator: validator,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        controller: controller,
-        focusNode: focusNode,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          labelText: label,
-          hintText: hintText,
+      child: SizedBox(
+        height: 55.0,
+        child: TextFormField(
+          validator: validator,
+          keyboardType: keyboardType,
+          obscureText: obscureText,
+          controller: controller,
+          focusNode: focusNode,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.green),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            labelText: label,
+            hintText: hintText,
+            fillColor: Colors.grey[200],
+            filled: true,
+          ),
         ),
       ),
     );

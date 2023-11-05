@@ -44,37 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCOitm5svT3OtvD6A3hmf3g-jAC_IkqWls',
-    appId: '1:163720975212:web:94157f7f20f8217d321949',
-    messagingSenderId: '163720975212',
-    projectId: 'eurobingo',
-    authDomain: 'eurobingo.firebaseapp.com',
-    storageBucket: 'eurobingo.appspot.com',
+    apiKey: 'AIzaSyA-PByhBGB5jWpmiYCOMI3mVMHPAcGGbyQ',
+    appId: '1:464488566350:web:267101aa9d83ae1ac0bd1f',
+    messagingSenderId: '464488566350',
+    projectId: 'eurobingo-89864',
+    authDomain: 'eurobingo-89864.firebaseapp.com',
+    storageBucket: 'eurobingo-89864.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD7wsoDTUFLbUgLTAJL8WyGQAO5uk48hwA',
-    appId: '1:163720975212:android:a97842edfb35134f321949',
-    messagingSenderId: '163720975212',
-    projectId: 'eurobingo',
-    storageBucket: 'eurobingo.appspot.com',
+    apiKey: 'AIzaSyA-PByhBGB5jWpmiYCOMI3mVMHPAcGGbyQ',
+    appId: '1:464488566350:android:6e58a387b38396bbc0bd1f',
+    messagingSenderId: '464488566350',
+    projectId: 'eurobingo-89864',
+    storageBucket: 'eurobingo-89864.firebaseapp.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAGDapb-llg7r0iq1z8NJtkzEJc5H-zvN8',
-    appId: '1:163720975212:ios:2d26fd7693572d03321949',
-    messagingSenderId: '163720975212',
-    projectId: 'eurobingo',
-    storageBucket: 'eurobingo.appspot.com',
-    iosBundleId: 'com.example.eurobingo',
+    apiKey: 'AIzaSyA-PByhBGB5jWpmiYCOMI3mVMHPAcGGbyQ',
+    appId: '1:464488566350:ios:38fa53d9fcbcfe6ac0bd1f',
+    messagingSenderId: '464488566350',
+    projectId: 'eurobingo-89864',
+    storageBucket: 'eurobingo-89864.firebaseapp.com',
+    iosBundleId: 'com.example.eurobingo-89864',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAGDapb-llg7r0iq1z8NJtkzEJc5H-zvN8',
-    appId: '1:163720975212:ios:5e0d5a1bc0457e40321949',
-    messagingSenderId: '163720975212',
-    projectId: 'eurobingo',
-    storageBucket: 'eurobingo.appspot.com',
-    iosBundleId: 'com.example.eurobingo.RunnerTests',
+    appId: '1:464488566350:ios:5e0d5a1bc0457e40321949',
+    messagingSenderId: '464488566350',
+    projectId: 'eurobingo-89864',
+    storageBucket: 'eurobingo-89864.firebaseapp.com',
+    iosBundleId: 'com.example.eurobingo-89864.RunnerTests',
   );
 }

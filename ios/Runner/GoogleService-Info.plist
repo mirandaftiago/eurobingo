@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAGDapb-llg7r0iq1z8NJtkzEJc5H-zvN8</string>
+	<string>AIzaSyA9wAhe8dyo6C0dknqqpjnTf8nb_dESR5Y</string>
 	<key>GCM_SENDER_ID</key>
-	<string>163720975212</string>
+	<string>464488566350</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.eurobingo</string>
+	<string>com.company.eurobingo</string>
 	<key>PROJECT_ID</key>
-	<string>eurobingo</string>
+	<string>eurobingo-89864</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eurobingo.appspot.com</string>
+	<string>eurobingo-89864.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:163720975212:ios:2d26fd7693572d03321949</string>
+	<string>1:464488566350:ios:38fa53d9fcbcfe6ac0bd1f</string>
 </dict>
 </plist>

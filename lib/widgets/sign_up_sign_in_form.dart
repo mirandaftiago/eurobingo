@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eurobingo/services/auth.dart';
 
@@ -17,7 +16,7 @@ class SignUpSignInForm extends StatefulWidget {
 }
 
 class _SignUpSignInFormState extends State<SignUpSignInForm> {
-  late FirebaseAuthService auth;
+  FirebaseAuthService auth = FirebaseAuthService();
   final formKey = GlobalKey<FormState>();
   final nameFocusNode = FocusNode(); // Create a FocusNode for name field
   final emailFocusNode = FocusNode(); // Create a FocusNode for email field
@@ -30,6 +29,7 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
   String name = '';
   String email = '';
   String password = '';
+  String confirmPassword = '';
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -63,6 +63,12 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
         password = _passwordController.text;
       });
     });
+
+    _confirmPasswordController.addListener(() {
+      setState(() {
+        confirmPassword = _confirmPasswordController.text;
+      });
+    });
   }
 
   // Method to start listening for keyboard visibility changes
@@ -81,23 +87,14 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
     });
   }
 
-  String? validateFields(String? value, {String? passwordValue}) {
-    if (value == null || value.isEmpty) {
-      return 'Please fill the field correctly';
-    } else if (passwordValue != null && value != passwordValue) {
-      return 'Passwords do not match';
-    }
-    return null;
-  }
-
   void redirectAfterLogin(BuildContext context) {
     if (formKey.currentState != null && formKey.currentState!.validate()) {
       // Validation passed, navigate to the next page
       Navigator.push(
-        context,
-        MaterialPageRoute(
+          context,
+          MaterialPageRoute(
             builder: (_) => const HomePage(),
-      ));
+          ));
     }
   }
 
@@ -155,7 +152,6 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
                         keyboardType: TextInputType.name,
                         controller: _nameController,
                         focusNode: nameFocusNode,
-                        validator: validateFields,
                       ),
                     FormTextField(
                       label: 'Email',
@@ -163,7 +159,6 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       focusNode: emailFocusNode,
-                      validator: validateFields,
                     ),
                     FormTextField(
                       label: 'Password',
@@ -171,7 +166,6 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
                       obscureText: true,
                       controller: _passwordController,
                       focusNode: passwordFocusNode,
-                      validator: validateFields,
                     ),
                     if (isRegistration)
                       FormTextField(
@@ -180,17 +174,45 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
                         obscureText: true,
                         controller: _confirmPasswordController,
                         focusNode: confirmPasswordFocusNode,
-                        validator: (value) => validateFields(value,
-                            passwordValue: _passwordController.text),
                       ),
                     LoginRegisterButton(
                       label: isRegistration ? 'Create account' : 'Sign in',
-                      onPressed: () {
-                        redirectAfterLogin(context);
+                      onPressed: () async {
+                        List<String> errorMessages = await auth.signInWithEmailAndPassword(email, password);
+                        if (errorMessages.isEmpty) {
+                          // Navigate to the authenticated screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        } else {
+                          /// Show error messages to the user
+                          for (String errorMessage in errorMessages) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(errorMessage),
+                            ));
+                          }
+                        }
                       },
-                      onRegister: () {
-                        _signUpAndSaveUser();
-                        redirectAfterLogin(context);
+                      onRegister: () async {
+                        List<String> errorMessages =
+                            await auth.signUpAndSaveUser(context, name, email,
+                                password, confirmPassword);
+                        if (errorMessages.isEmpty) {
+                          // Registration was successful, navigate to the authenticated screen
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        } else {
+                          // Show error messages to the user
+                          for (String errorMessage in errorMessages) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(errorMessage),
+                            ));
+                          }
+                        }
+                        //redirectAfterLogin(context);
                       },
                     ),
                   ],
@@ -232,28 +254,5 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
         ),
       ),
     );
-  }
-
-  Future<void> _signUpAndSaveUser() async {
-    try {
-      // Step 1: Create the user with Firebase Authentication
-      UserCredential authResult =
-          await auth.signUpWithEmailAndPassword(email, password);
-      User? user = authResult.user;
-
-      if (user != null) {
-        // Step 2: Save user information to Firestore
-        await firestore.collection('users').doc(user.uid).set({
-          'name': name,
-          'email': email,
-        });
-
-        print('User is successfully created and saved to Firestore');
-      } else {
-        print('Some error happened during user creation');
-      }
-    } catch (e) {
-      print('Error during sign up and user creation: $e');
-    }
   }
 }

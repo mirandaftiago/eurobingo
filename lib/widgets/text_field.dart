@@ -6,7 +6,6 @@ class FormTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final TextEditingController? controller;
-  final String? Function(String?) validator;
     // Controller to track keyboard visibility
   final FocusNode focusNode;
 
@@ -18,7 +17,6 @@ class FormTextField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     required this.focusNode,
-    required this.validator,
   });
 
   @override
@@ -28,7 +26,6 @@ class FormTextField extends StatelessWidget {
       child: SizedBox(
         height: 55.0,
         child: TextFormField(
-          validator: validator,
           keyboardType: keyboardType,
           obscureText: obscureText,
           controller: controller,

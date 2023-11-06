@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "163720975212",
-    "project_id": "eurobingo",
-    "storage_bucket": "eurobingo.appspot.com"
+    "project_number": "464488566350",
+    "project_id": "eurobingo-89864",
+    "storage_bucket": "eurobingo-89864.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163720975212:android:a97842edfb35134f321949",
+        "mobilesdk_app_id": "1:464488566350:android:6e58a387b38396bbc0bd1f",
         "android_client_info": {
           "package_name": "com.example.eurobingo"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD7wsoDTUFLbUgLTAJL8WyGQAO5uk48hwA"
+          "current_key": "AIzaSyAYravhgkwa5tbCYwcLNnppuXBlLoqUpS0"
         }
       ],
       "services": {

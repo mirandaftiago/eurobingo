@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class LoginRegisterButton extends StatelessWidget {
   final String label;
   final void Function() onPressed;
+  final void Function()? onRegister;
 
   const LoginRegisterButton({
     super.key, 
     required this.label,
     required this.onPressed,
+    this.onRegister,
   });
 
   @override
@@ -20,7 +22,13 @@ class LoginRegisterButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextButton(
-        onPressed: onPressed,
+        onPressed: () {
+          if (onRegister != null && label == 'Create account') {
+            onRegister!(); // call onRegister if it's provided and the label is Register.
+          } else {
+            onPressed(); // call the regular onPressed function
+          }
+        },
         child: Text(
           label,
           style: const TextStyle(color: Colors.white, fontSize: 25),

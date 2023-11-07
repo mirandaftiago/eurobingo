@@ -1,6 +1,8 @@
+import 'package:eurobingo/services/authentication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'package:eurobingo/widgets/sign_up_sign_in_form.dart';
@@ -25,7 +27,16 @@ void main() async {
     print('Firebase initialization error: $e');
   }
 
-  runApp(const EurobingoApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthenticationState>(
+          create: (context) => AuthenticationState(),
+        ),
+      ],
+      child: const EurobingoApp(),
+    ),
+  );
 }
 
 class EurobingoApp extends StatelessWidget {

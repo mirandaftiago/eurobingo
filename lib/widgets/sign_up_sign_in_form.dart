@@ -1,7 +1,8 @@
+import 'package:eurobingo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eurobingo/services/auth.dart';
+import 'package:eurobingo/services/authentication_state.dart';
 
 import 'package:eurobingo/widgets/home_page.dart';
 import 'package:eurobingo/widgets/login_button.dart';
@@ -16,7 +17,7 @@ class SignUpSignInForm extends StatefulWidget {
 }
 
 class _SignUpSignInFormState extends State<SignUpSignInForm> {
-  FirebaseAuthService auth = FirebaseAuthService();
+  AuthenticationState auth = AuthenticationState();
   final formKey = GlobalKey<FormState>();
   final nameFocusNode = FocusNode(); // Create a FocusNode for name field
   final emailFocusNode = FocusNode(); // Create a FocusNode for email field
@@ -96,6 +97,18 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
             builder: (_) => const HomePage(),
           ));
     }
+  }
+
+  void redirectToLoginPage(BuildContext context) {
+    // Unfocus any active text fields to hide the keyboard
+    FocusScope.of(context).unfocus();
+
+    // Navigate to the LoginScreen
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
   }
 
   // Method to toggle between registration and sign-in
@@ -178,7 +191,8 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
                     LoginRegisterButton(
                       label: isRegistration ? 'Create account' : 'Sign in',
                       onPressed: () async {
-                        List<String> errorMessages = await auth.signInWithEmailAndPassword(email, password);
+                        List<String> errorMessages = await auth
+                            .signInWithEmailAndPassword(email, password);
                         if (errorMessages.isEmpty) {
                           // Navigate to the authenticated screen
                           Navigator.push(
@@ -203,7 +217,7 @@ class _SignUpSignInFormState extends State<SignUpSignInForm> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                                  builder: (context) => const HomePage()));
                         } else {
                           // Show error messages to the user
                           for (String errorMessage in errorMessages) {
